@@ -17,7 +17,6 @@ char *res;
 
 res = infinite_add(n, m, r, 100);
 if (res == 0)
-
 {
 printf("Error\n");
 }
@@ -33,7 +32,6 @@ if (res == 0)
 printf("Error\n");
 }
 else
-
 {
 printf("%s + %s = %s\n", n, m, res);
 }
@@ -50,7 +48,6 @@ printf("%s + %s = %s\n", n, m, res);
 }
 res = infinite_add(n, m, r3, 11);
 if (res == 0)
-
 {
 printf("Error\n");
 }
