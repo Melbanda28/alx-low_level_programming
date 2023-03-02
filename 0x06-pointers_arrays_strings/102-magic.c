@@ -1,6 +1,10 @@
 #include <stdio.h>
 
-int main(void)
+/*
+ * main - entry point
+ * Return: Always 0
+ */
+(Wimplicit) int main(void)
 {
 int n;
 int a[5];
