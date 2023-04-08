@@ -1,7 +1,12 @@
 #include "main.h"
 
-void print_binary(unsigned long int n) 
+/**
+ * print_binary - a function that prints the binary representation ofa number
+ * @n: number to be printed in binary
+ */
+void print_binary(unsigned long int n)
 {
+
 	int i, count = 0;
 	unsigned long int current;
 
