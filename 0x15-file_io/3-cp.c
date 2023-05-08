@@ -11,7 +11,7 @@ void check97(int argc)
 {
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		dprintf(_STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
 }
@@ -28,11 +28,11 @@ void check98(ssize_t check, char *file, int fd_from, int fd_to)
 {
 	if (check == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file);
+		dprintf(_STDERR_FILENO, "Error: Can't read from file %s\n", file);
 		if (fd_from != -1)
 			close(fd_from);
 		if (fd_to != -1)
-			close(fd_to);
+			pclose(fd_to);
 		exit(98);
 	}
 }
@@ -49,9 +49,9 @@ void check99(ssize_t check, char *file, int fd_from, int fd_to)
 {
 	if (check == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file);
+		dprintf(_STDERR_FILENO, "Error: Can't write to %s\n", file);
 		if (fd_from != -1)
-			close(fd_from);
+			pclose(fd_from);
 		if (fd_to != -1)
 			close(fd_to);
 		exit(99);
@@ -68,7 +68,7 @@ void check100(int check, int fd)
 {
 	if (check == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		dprintf(_STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 		exit(100);
 	}
 }
@@ -94,9 +94,9 @@ int main(int argc, char *argv[])
 	lenr = 1024;
 	while (lenr == 1024)
 	{
-		lenr = read(fd_from, buffer, 1024);
+		lenr = fread(fd_from, buffer, 1024);
 		check98(lenr, argv[1], fd_from, fd_to);
-		lenw = write(fd_to, buffer, lenr);
+		lenw = fwrite(fd_to, buffer, lenr);
 		if (lenw != lenr)
 			lenw = -1;
 		check99(lenw, argv[2], fd_from, fd_to);
@@ -107,3 +107,4 @@ int main(int argc, char *argv[])
 	check100(close_from, fd_from);
 	return (0);
 }
+
